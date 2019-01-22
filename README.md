@@ -1,6 +1,8 @@
-= Open Source Code and Data for Wake County Fire Services Planning =
+Open Source Code and Data for Wake County Fire Services Planning
+================================================================
 
-== Setup ==
+Setup
+-----
 
 Install [Miniconda](https://repo.anaconda.com/)
 
@@ -18,7 +20,8 @@ mkdir data
 
 Put downloaded files here.
 
-== Data ==
+Data
+----
 
 All Wake County non-EMS fire calls since 2007:
 
