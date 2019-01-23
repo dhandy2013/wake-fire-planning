@@ -61,7 +61,8 @@ df.drop(df.index[sum(df.index.notnull()):], inplace=True)
 monthly = df.groupby(pd.Grouper(freq='M')).count()
 yearly = df.groupby(pd.Grouper(freq='Y')).count()
 
-# Plot number of yearly incidents except for latest (incomplete) year
-yearly['incident_number'][:-1].plot()
+# Plot number of monthly incidents except for latest (incomplete) month
+text = "Wake County Fire Incidents by Month"
+monthly['incident_number'][:-1].plot(title=text)
 
 ```
