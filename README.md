@@ -32,8 +32,7 @@ Filename: Fire_Incidents.csv
 Example Analysis
 ----------------
 
-Start [Jupyter Notebook]() with the call volume trends analysis:
-
+Launch this [Jupyter Notebook](https://jupyter.org/) to see call volume:
 ```
 jupyter notebook call-volume-trends.ipynb
 ```
