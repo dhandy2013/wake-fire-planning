@@ -10,7 +10,7 @@ Run these commands:
 ```
 conda create -n wake-fire-planning 'python>=3.7'
 conda activate wake-fire-planning
-conda install ipython jupyter matplotlib pandas requests xlrd
+conda install ipython jupyter matplotlib pandas requests xlrd openpyxl
 ```
 
 Create a data subdirectory:
