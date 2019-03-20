@@ -4,21 +4,14 @@ Open Source Code and Data for Wake County Fire Services Planning
 Setup
 -----
 
-Install [Miniconda](https://repo.anaconda.com/)
+Install [Pipenv](https://pipenv.readthedocs.io/en/latest/)
+
+Install [Git Large File Support](https://git-lfs.github.com/)
 
 Run these commands:
 ```
-conda create -n wake-fire-planning 'python>=3.7'
-conda activate wake-fire-planning
-conda install ipython jupyter matplotlib pandas requests xlrd openpyxl
+pipenv install
 ```
-
-Create a data subdirectory:
-```
-mkdir data
-```
-
-Put downloaded files here.
 
 Data
 ----
@@ -34,5 +27,5 @@ Example Analysis
 
 Launch this [Jupyter Notebook](https://jupyter.org/) to see call volume:
 ```
-jupyter notebook call-volume-trends.ipynb
+pipenv run jupyter notebook call-volume-trends.ipynb
 ```
