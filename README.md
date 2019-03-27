@@ -8,14 +8,14 @@ Install [Pipenv](https://pipenv.readthedocs.io/en/latest/)
 
 Install [Git Large File Support](https://git-lfs.github.com/)
 
-To install the needed Python pacakges:
-```
-pipenv install
-```
-
 To pull down the larger data files from github:
 ```
 git lfs pull
+```
+
+To install the needed Python pacakges:
+```
+pipenv sync
 ```
 
 Data
