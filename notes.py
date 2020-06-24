@@ -1,3 +1,13 @@
+# Really helpful pandas cheat sheet:
+# https://towardsdatascience.com/pandas-equivalent-of-10-useful-sql-queries-f79428e60bd9
+
+# How to plot histograms:
+# https://matplotlib.org/3.1.3/gallery/statistics/hist.html
+
+#
+# Code snippets
+#
+
 %matplotlib notebook
 
 def graph_dispatches_for_dept_by_month(dept_name):
