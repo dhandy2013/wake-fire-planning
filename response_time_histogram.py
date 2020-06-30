@@ -76,7 +76,11 @@ def plot_travel_times_histogram(travel_times,
     h = np.histogram(travel_times, bins=num_bins)[0]
     for y in np.linspace(0.0, max(h), 20):
         ax.plot(t, y, 'o', color='gray', markersize=3)
+
+    # Place some text with additional info
+    mean = sum(travel_times) / len(travel_times)
     ax.text(t, max(h) / 2.0,
+            f"Mean travel time: {mean:.1f} seconds\n"
             f"90th percentile time: {t:.1f} seconds\n"
             f"Total number of incidents: {len(travel_times)}")
 
@@ -99,6 +103,9 @@ def main():
     conn.close()
 
     travel_times = df['COL12']
+
+    mean = sum(travel_times) / len(travel_times)
+    print(f"Mean travel time: {mean:.1f}".format(mean))
 
     t = np.percentile(travel_times, 90)
     print(f"90th percentile travel time: {t:.1f} seconds")
