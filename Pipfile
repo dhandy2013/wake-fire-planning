@@ -9,6 +9,7 @@ verify_ssl = true
 ipython = ">=7.2"
 jupyter = ">=1.0.0"
 matplotlib = ">=3.0.2"
+mysql-connector-python = ">=8.0.20"
 openpyxl = ">=2.6.1"
 pandas = ">=0.23.4"
 requests = ">=2.21.0"
