@@ -3,6 +3,7 @@ Generate a histogram of emergency services response times
 
 Uses data from data/ResponseTimes-3.sql, loaded into MySQL
 """
+from datetime import timedelta
 import os
 
 # https://github.com/mysql/mysql-connector-python
@@ -26,7 +27,7 @@ def get_db_connection():
 
 
 def get_response_times(conn):
-    query_filename = 'wonderful-big-query-1.sql'
+    query_filename = 'response-times-query-1.sql'
     print(f"Finding first response times using query: {query_filename}")
     with open(query_filename) as f:
         df = pd.read_sql(f.read(), conn)
@@ -54,6 +55,25 @@ def calc_travel_times_histogram(travel_times, num_bins=100):
     return h
 
 
+def timedelta_str(seconds):
+    """
+    seconds: Time in seconds, floating point
+    Return seconds converted to a time delta, rounded to nearest second,
+    converted to a string, with leading zeros trimmed.
+    """
+    s = str(timedelta(seconds=round(seconds)))
+    while True:
+        next_s = s.lstrip("0")
+        if next_s == s:
+            break
+        s = next_s
+        next_s = s.lstrip(":")
+        if next_s == s:
+            break
+        s = next_s
+    return s
+
+
 def plot_travel_times_histogram(travel_times,
                                 num_bins=100,
                                 title="First Response Travel Times",
@@ -72,17 +92,20 @@ def plot_travel_times_histogram(travel_times,
     ax.hist(travel_times, bins=num_bins)
 
     # Plot the 90th percentile point
-    t = np.percentile(travel_times, 90)
+    t90 = np.percentile(travel_times, 90)
     h = np.histogram(travel_times, bins=num_bins)[0]
-    for y in np.linspace(0.0, max(h), 20):
-        ax.plot(t, y, 'o', color='gray', markersize=3)
+    for y in np.linspace(0.0, max(h), 40):
+        ax.plot(t90, y, 'o', color='red', markersize=2)
 
     # Place some text with additional info
     mean = sum(travel_times) / len(travel_times)
-    ax.text(t, max(h) / 2.0,
-            f"Mean travel time: {mean:.1f} seconds\n"
-            f"90th percentile time: {t:.1f} seconds\n"
-            f"Total number of incidents: {len(travel_times)}")
+    msg = (
+        f"Mean travel time: {timedelta_str(mean)}\n"
+        f"90th percentile time: {timedelta_str(t90)}\n"
+        f"Total number of incidents: {len(travel_times)}"
+    )
+    ax.text(max(travel_times) / 2.0, max(h) / 2.0, msg,
+            horizontalalignment="center")
 
     # Save the plot by calling plt.savefig() BEFORE plt.show()
     print("Writing plot image to", png_filename)
@@ -107,8 +130,8 @@ def main():
     mean = sum(travel_times) / len(travel_times)
     print(f"Mean travel time: {mean:.1f}".format(mean))
 
-    t = np.percentile(travel_times, 90)
-    print(f"90th percentile travel time: {t:.1f} seconds")
+    t90 = np.percentile(travel_times, 90)
+    print(f"90th percentile travel time: {t90:.1f} seconds")
 
     plot_travel_times_histogram(travel_times)
 
