@@ -1,0 +1,1 @@
+ALTER TABLE ResponseTimes ADD COLUMN IsRuralResponse BOOLEAN

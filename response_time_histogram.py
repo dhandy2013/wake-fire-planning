@@ -27,10 +27,12 @@ def get_db_connection():
 
 
 def get_response_times(conn):
-    query_filename = 'response-times-query-1.sql'
+    query_filename = 'response-times-query-2.sql'
     print(f"Finding first response times using query: {query_filename}")
     with open(query_filename) as f:
-        df = pd.read_sql(f.read(), conn)
+        query = f.read()
+    # print(f"Query contents:\n{query}")
+    df = pd.read_sql(query, conn)
     print(f"First response times: {len(df)} rows")
 
     # Fix column types
